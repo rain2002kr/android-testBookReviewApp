@@ -1,4 +1,6 @@
 # android-testBookReviewApp
 
-# test
- 2021 best solution is for git hub
+# 2021-0522 
+  메인 activity 
+ 
+ 
