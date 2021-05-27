@@ -14,10 +14,14 @@
   step 2 : 가져온 데이터를 recycler view 에 뿌리기 
   완료, interpark open API 가져올때, dto에 item 잘못 적어놔서 고생했음. 
     
-  step 3 : 
-  step 4.
-  step 5.
-  step 6.
+# 2021-0528 
+   Room 검색어 저장 및 삭제 기능 확인 
+# 2021-0526 
+  메인 activity 
+  target1 : 최근 검색어 Room 이용하여, 내부 저장하고 삭제 가능 하도록 할 것  
+  target2 : 검색 기능 이용하여, inter park open API 에 책 검색 기록 가져 올것 
+  target3 : 가져온 데이터 기반으로 새로운 리싸이클러뷰 보여주고, 다른 리싸이클러뷰는 숨길것 
+  target4 : 리싸이클러뷰 터치하면 detail Activity 띄우면서 보여 줄것 
   
   
  

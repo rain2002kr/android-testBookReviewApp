@@ -1,16 +1,20 @@
 package com.rain2002kr.tests_bookreview
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.rain2002kr.tests_bookreview.Adapter.BookAdapter
 import com.rain2002kr.tests_bookreview.Api.BookService
 import com.rain2002kr.tests_bookreview.Model.BestSellerDto
 import com.rain2002kr.tests_bookreview.Model.Book
+import com.rain2002kr.tests_bookreview.Model.History
 import com.rain2002kr.tests_bookreview.Model.SearchBookDto
 import com.rain2002kr.tests_bookreview.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -18,6 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -27,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     val list: List<Book> =
         listOf(Book(1, "찾아라", "설명문", 18000, "http://com.rain2002kr", "http://com.rain2002kr"))
 
+    private lateinit var db : AppDatabase
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +41,39 @@ class MainActivity : AppCompatActivity() {
         initBookOpenApi()
         initRecyclerView()
         searchBook()
+        db = getAppDatabase(this)
+
+        saveSearchHistory()
+        showSearchHistory()
+
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun saveSearchHistory() {
+        binding.deleteButton.setOnClickListener{
+            try{ Thread{ db.historyDao().deleteAll() }.start()
+            }catch (e:Exception){e.printStackTrace()}
+        }
+
+        binding.bookEditTextView.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == MotionEvent.ACTION_DOWN){
+                val search  = binding.bookEditTextView.text
+                Log.d(TAG, "엔터 처리완료 : $search")
+                try{
+                    Thread{
+                        val history = History( keyword = search.toString())
+                        db.historyDao().insertHistory(history)
+                    }.start()
+                }catch (e : Exception){ e.printStackTrace() }
+
+                return@setOnKeyListener true // 실제 이벤트를 처리 했음을 의미
+            }
+            return@setOnKeyListener false // 다른 이벤트가 처리 되어야함.
+        }
+    }
+
+    private fun showSearchHistory() {
 
     }
 
