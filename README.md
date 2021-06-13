@@ -15,14 +15,30 @@
   완료, interpark open API 가져올때, dto에 item 잘못 적어놔서 고생했음. 
     
 # 2021-0528 
-   Room 검색어 저장 및 삭제 기능 확인 
-# 2021-0526 
+
+   Room 검색어 저장 및 삭제 기능 확인
+
+# 2021-0530
+    검색어 저장 및 키워드 이용해서 북 API 가져오기 
+    History Recycler view show and hide 
+    detail 뷰 구성  
+    
+# 2021----- 
   메인 activity 
   target1 : 최근 검색어 Room 이용하여, 내부 저장하고 삭제 가능 하도록 할 것  
   target2 : 검색 기능 이용하여, inter park open API 에 책 검색 기록 가져 올것 
   target3 : 가져온 데이터 기반으로 새로운 리싸이클러뷰 보여주고, 다른 리싸이클러뷰는 숨길것 
   target4 : 리싸이클러뷰 터치하면 detail Activity 띄우면서 보여 줄것 
   
+# 2021-0613 
+  annotationProcessor  'com.github.bumptech.glide:compiler:4.12.0' 추가 했음. 
+  최근 검색어 누르면 바로 검색 되는 기능 추가 
+  History Adapter 에 bind.root.setOnclickListener { 이 안에 함수 넣기 }
+  MainActivity 에서 adapter 안에다가 다음 함수 호출 후, 받아온 값으로 처리  
+  
+# 의문 사항 
+    분명 UI 작업 할땐, runOnUiThread 에서 해야 한다고 했는데, 반대로 해야 에러가 발생 하지 않았다. 
+    
   
  
  
